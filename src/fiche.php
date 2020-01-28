@@ -79,16 +79,16 @@ class Fiche{
 
 
     public function ajouterPas($pas){
+
+        if(count($this->listePas)==3){
+            throw new tooMuchPasException();
+        }
         $this->listePas[] = $pas; 
+
     }
 
 
     public function terminerFiche(){
         $this->dateFin = date('Y-m-d');
     }
-
-
-
-
-
 }

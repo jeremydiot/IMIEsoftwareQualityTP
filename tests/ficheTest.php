@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 require "src/fiche.php";
 require "src/pas.php";
+require "src/tooMuchPasException.php";
 
 final class ficheTest extends TestCase
 {
@@ -12,6 +13,14 @@ final class ficheTest extends TestCase
         $pas = $this->createStub(Pas::class);
         $fiche->ajouterPas($pas);
         $this->assertEquals(1, count($fiche->getListePas()));
+    }
+
+    public function testExceptionAjouterPas(){
+        $pas = array($this->createStub(Pas::class),$this->createStub(Pas::class),$this->createStub(Pas::class));
+        $fiche = new Fiche('fiche1',$pas);
+        $this->expectException(TooMuchPasException::class);
+        $fiche->ajouterPas($this->createStub(Pas::class));
+     
     }
 
 
@@ -65,7 +74,6 @@ final class ficheTest extends TestCase
         $stubPas2->method('getStatut')
                     ->willReturn('OK');
 
-
         $fiche = new Fiche('fiche1',array($stubPas1,$stubPas2));
 
         $fiche->calculerStatut();
@@ -80,5 +88,4 @@ final class ficheTest extends TestCase
 
         $this->assertEquals(date('Y-m-d'), $fiche->getDateFin());
     }
-
 }
