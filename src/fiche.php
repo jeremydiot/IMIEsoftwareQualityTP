@@ -32,7 +32,7 @@ class Fiche{
 
 
     public function executerFiche(){
-        $this->dateDebut = date('Y-m-d');
+        $this->dateDebut = new DateTime();
         $this->dateFin = null;
         $this->statut = 'En cours';
 
@@ -89,6 +89,6 @@ class Fiche{
 
 
     public function terminerFiche(){
-        $this->dateFin = date('Y-m-d');
+        $this->dateFin = new DateTime();
     }
 }

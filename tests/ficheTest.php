@@ -8,6 +8,23 @@ require "src/tooMuchPasException.php";
 final class ficheTest extends TestCase
 {
     protected $fiche;
+    protected static $dateDuJour;
+
+    public static function setUpBeforeClass(): void
+    {
+        self::$dateDuJour = new DateTime();
+        // sleep(4);
+        fwrite(STDOUT,__METHOD__."\n");
+
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::$dateDuJour = null;
+        fwrite(STDOUT,__METHOD__."\n");
+    }
+    
+    
 
     protected function setUp():void{
         $this->fiche = new Fiche('fiche1',null);
@@ -81,7 +98,8 @@ final class ficheTest extends TestCase
 
         $this->fiche->executerFiche();
 
-        $this->assertEquals(date('Y-m-d'), $this->fiche->getDateDebut());
+        // $this->assertEquals(date('Y-m-d'), $this->fiche->getDateDebut());
+        $this->assertEqualsWithDelta(self::$dateDuJour->getTimestamp(),$this->fiche->getDateDebut()->getTimestamp(),3);
         $this->assertNull($this->fiche->getDateFin());
         $this->assertEquals('En cours', $this->fiche->getStatut());
 
@@ -112,6 +130,8 @@ final class ficheTest extends TestCase
 
         $this->fiche->terminerFiche();
 
-        $this->assertEquals(date('Y-m-d'), $this->fiche->getDateFin());
+        $this->assertEqualsWithDelta(self::$dateDuJour->getTimestamp(),$this->fiche->getDateFin()->getTimestamp(),3);
+
+        // $this->assertEquals(date('Y-m-d'), $this->fiche->getDateFin());
     }
 }
