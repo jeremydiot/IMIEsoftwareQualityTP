@@ -30,6 +30,7 @@ final class CampagneTest extends TestCase
 
     /**
      * @covers Campagne::ajouterFiche
+     * @covers Campagne::getListeFiche
      */
     public function testAjouterFiche(){
         $fiche = $this->createStub(Fiche::class);
@@ -81,7 +82,7 @@ final class CampagneTest extends TestCase
     }
 
     /**
-     * @covers Campagne::initialiserCampagne
+     * @covers Campagne::getDateDebut
      * @depends testExecInitialiserCampagne
      */
     public function testDateDebutInitialiserCampagne($campagne){
@@ -89,7 +90,7 @@ final class CampagneTest extends TestCase
     }
 
     /**
-     * @covers Campagne::initialiserCampagne
+     * @covers Campagne::getDateFin
      * @depends testExecInitialiserCampagne
      */
     public function testDateFinInitialiserCampagne($campagne){
@@ -97,7 +98,7 @@ final class CampagneTest extends TestCase
     }
 
     /**
-     * @covers Campagne::initialiserCampagne
+     * @covers Campagne::getStatut
      * @depends testExecInitialiserCampagne
      */
     public function testStatutInitialiserCampagne($campagne){
@@ -137,7 +138,7 @@ final class CampagneTest extends TestCase
     }
 
     /**
-     * @covers Campagne::executerCampagne
+     * @covers Campagne::getDateDebut
      * @depends testExecExecuterCampagne
      */
     public function testDateDebutExecuterCampagne($campagne){
@@ -145,7 +146,7 @@ final class CampagneTest extends TestCase
     }
 
     /**
-     * @covers Campagne::executerCampagne
+     * @covers Campagne::getStatut
      * @depends testExecExecuterCampagne
      */
     public function testStatutExecuterCampagne($campagne){
@@ -227,6 +228,7 @@ final class CampagneTest extends TestCase
 
     /**
      * @covers Campagne::terminerCampagne
+     * @covers Campagne::getDateFin
      * @depends testExecExecuterCampagne
      */
     public function testTerminerCampagne($campagne){
