@@ -1,4 +1,4 @@
 <?php
-class tooMuchPasException extends Exception{
+class TooMuchPasException extends Exception{
     
 }

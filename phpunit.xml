@@ -4,7 +4,6 @@
             <directory>./tests</directory>
             <!-- <exclude>./test/pasTest.php</exclude> -->
             <!-- <file>./test/pasTest.php</file> -->
-            
         </testsuite>
     </testsuites>
 </phpunit>

@@ -81,10 +81,9 @@ class Fiche{
     public function ajouterPas($pas){
 
         if(count($this->listePas)==3){
-            throw new tooMuchPasException();
+            throw new TooMuchPasException();
         }
         $this->listePas[] = $pas; 
-
     }
 
 

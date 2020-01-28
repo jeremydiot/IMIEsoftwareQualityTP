@@ -5,7 +5,7 @@ require_once "src/fiche.php";
 require_once "src/pas.php";
 require_once "src/tooMuchPasException.php";
 
-final class ficheTest extends TestCase
+final class FicheTest extends TestCase
 {
     protected $fiche;
     protected static $dateDuJour;
