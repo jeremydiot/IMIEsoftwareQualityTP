@@ -1,9 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require "src/fiche.php";
-require "src/pas.php";
-require "src/tooMuchPasException.php";
+require_once "src/fiche.php";
+require_once "src/pas.php";
+require_once "src/tooMuchPasException.php";
 
 final class ficheTest extends TestCase
 {
@@ -14,14 +14,14 @@ final class ficheTest extends TestCase
     {
         self::$dateDuJour = new DateTime();
         // sleep(4);
-        fwrite(STDOUT,__METHOD__."\n");
+        // fwrite(STDOUT,__METHOD__."\n");
 
     }
 
     public static function tearDownAfterClass(): void
     {
         self::$dateDuJour = null;
-        fwrite(STDOUT,__METHOD__."\n");
+        // fwrite(STDOUT,__METHOD__."\n");
     }
     
     

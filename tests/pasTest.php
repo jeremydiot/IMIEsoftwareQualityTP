@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require "src/pas.php";
+require_once "src/pas.php";
 
 final class PasTest extends TestCase
 {
