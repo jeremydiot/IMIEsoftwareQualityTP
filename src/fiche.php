@@ -1,5 +1,7 @@
 <?php
 
+require_once "src/exception/tooMuchPasException.php";
+
 class Fiche{
 
     private $Nom;

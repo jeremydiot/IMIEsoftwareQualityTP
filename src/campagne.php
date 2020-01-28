@@ -1,5 +1,9 @@
 <?php
 
+require_once "src/exception/tooMuchFicheException.php";
+require_once "src/exception/dateDebutNullException.php";
+require_once "src/exception/noFicheInCampagneException.php";
+
 class Campagne{
 
     private $nom;
@@ -63,13 +67,14 @@ class Campagne{
     }
 
     public function initialiserCampagne(){
+        if(count($this->listeFiche)==0){
+            throw new NoFicheInCampagneException();
+        }
+
         $this->dateDebut = null;
         $this->dateFin = null;
         $this->statut = null;
 
-        if(count($this->listeFiche)==0){
-            throw new NoFicheInCampagneException();
-        }
         foreach ($this->listeFiche as $fiche) {
             $fiche->initialiserFiche();
         }
