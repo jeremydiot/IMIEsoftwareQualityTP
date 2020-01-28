@@ -7,19 +7,36 @@ require "src/tooMuchPasException.php";
 
 final class ficheTest extends TestCase
 {
+    protected $fiche;
+
+    protected function setUp():void{
+        $this->fiche = new Fiche('fiche1',null);
+        // fwrite(STDOUT,__METHOD__."\n");
+    }
+
+    protected function tearDown():void{
+        unset($this->fiche);
+        // fwrite(STDOUT,__METHOD__."\n");
+    }
 
     public function testAjouterPas(){
-        $fiche = new Fiche('fiche1',null);
+        // $fiche = new Fiche('fiche1',null);
         $pas = $this->createStub(Pas::class);
-        $fiche->ajouterPas($pas);
-        $this->assertEquals(1, count($fiche->getListePas()));
+        $this->fiche->ajouterPas($pas);
+        $this->assertEquals(1, count($this->fiche->getListePas()));
     }
 
     public function testExceptionAjouterPas(){
-        $pas = array($this->createStub(Pas::class),$this->createStub(Pas::class),$this->createStub(Pas::class));
-        $fiche = new Fiche('fiche1',$pas);
+        // $pas = array($this->createStub(Pas::class),$this->createStub(Pas::class),$this->createStub(Pas::class));
+        // $fiche = new Fiche('fiche1',$pas);
+        $this->fiche->ajouterPas($this->createStub(Pas::class));
+        $this->fiche->ajouterPas($this->createStub(Pas::class));
+        $this->fiche->ajouterPas($this->createStub(Pas::class));
+
         $this->expectException(TooMuchPasException::class);
-        $fiche->ajouterPas($this->createStub(Pas::class));
+
+        $this->fiche->ajouterPas($this->createStub(Pas::class));
+        // $fiche->ajouterPas($this->createStub(Pas::class));
      
     }
 
@@ -34,13 +51,16 @@ final class ficheTest extends TestCase
         $mockPas2->expects($this->once())
                 ->method('initialiserPas');
 
-        $fiche = new Fiche('fiche1',array($mockPas1,$mockPas2));
+        // $fiche = new Fiche('fiche1',array($mockPas1,$mockPas2));
 
-        $fiche->initialiserFiche();
+        $this->fiche->ajouterPas($mockPas1);
+        $this->fiche->ajouterPas($mockPas2);
 
-        $this->assertNull($fiche->getDateDebut());
-        $this->assertNull($fiche->getDateFin());
-        $this->assertEquals('En cours', $fiche->getStatut());
+        $this->fiche->initialiserFiche();
+
+        $this->assertNull($this->fiche->getDateDebut());
+        $this->assertNull($this->fiche->getDateFin());
+        $this->assertEquals('En cours', $this->fiche->getStatut());
 
     }
 
@@ -54,13 +74,16 @@ final class ficheTest extends TestCase
         $mockPas2->expects($this->once())
                 ->method('initialiserPas');
 
-        $fiche = new Fiche('fiche1',array($mockPas1,$mockPas2));
+        // $fiche = new Fiche('fiche1',array($mockPas1,$mockPas2));
 
-        $fiche->executerFiche();
+        $this->fiche->ajouterPas($mockPas1);
+        $this->fiche->ajouterPas($mockPas2);
 
-        $this->assertEquals(date('Y-m-d'), $fiche->getDateDebut());
-        $this->assertNull($fiche->getDateFin());
-        $this->assertEquals('En cours', $fiche->getStatut());
+        $this->fiche->executerFiche();
+
+        $this->assertEquals(date('Y-m-d'), $this->fiche->getDateDebut());
+        $this->assertNull($this->fiche->getDateFin());
+        $this->assertEquals('En cours', $this->fiche->getStatut());
 
     }
 
@@ -74,18 +97,21 @@ final class ficheTest extends TestCase
         $stubPas2->method('getStatut')
                     ->willReturn('OK');
 
-        $fiche = new Fiche('fiche1',array($stubPas1,$stubPas2));
+        // $fiche = new Fiche('fiche1',array($stubPas1,$stubPas2));
 
-        $fiche->calculerStatut();
+        $this->fiche->ajouterPas($stubPas1);
+        $this->fiche->ajouterPas($stubPas2);
 
-        $this->assertEquals('KO', $fiche->getStatut());
+        $this->fiche->calculerStatut();
+
+        $this->assertEquals('KO', $this->fiche->getStatut());
     }
 
     public function testTerminerFiche(){
-        $fiche = new Fiche('fiche1',null);
+        // $fiche = new Fiche('fiche1',null);
 
-        $fiche->terminerFiche();
+        $this->fiche->terminerFiche();
 
-        $this->assertEquals(date('Y-m-d'), $fiche->getDateFin());
+        $this->assertEquals(date('Y-m-d'), $this->fiche->getDateFin());
     }
 }
