@@ -58,7 +58,6 @@ class Campagne{
         $this->listeFiche = $listeFiche;
     }
 
-
     public function ajouterFiche($fiche){
         if(count($this->listeFiche)==10){
             throw new TooMuchFicheException();
